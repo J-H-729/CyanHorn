@@ -20,3 +20,10 @@ Copy-Item .env.example .env
 Fill in `LLM_API_KEY`, `LLM_BASE_URL`, and `LLM_MODEL` in `.env`. Never commit
 `.env` or raw source datasets.
 
+## Member B foundation
+
+`osinsight.retrieval.BM25Index` ranks parser-produced project records without a
+vector database. `DescriptionAgent` and `ComparisonAgent` use the shared LLM
+client and validate JSON responses against the report schemas. `EvidenceValidator`
+checks that report references point to files and line ranges inside a project.
+
