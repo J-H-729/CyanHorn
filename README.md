@@ -27,3 +27,13 @@ vector database. `DescriptionAgent` and `ComparisonAgent` use the shared LLM
 client and validate JSON responses against the report schemas. `EvidenceValidator`
 checks that report references point to files and line ranges inside a project.
 
+`AnalysisOrchestrator` connects retrieval, candidate selection, description, and
+comparison into one callable workflow.
+
+Run the offline tests from PowerShell:
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m unittest discover -s tests -v
+```
+

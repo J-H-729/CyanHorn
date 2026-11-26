@@ -6,7 +6,10 @@ from dataclasses import dataclass
 from typing import Any
 
 from dotenv import load_dotenv
-from openai import OpenAI
+try:
+    from openai import OpenAI
+except ImportError:  # Optional until an online LLM call is requested.
+    OpenAI = None  # type: ignore[assignment,misc]
 
 
 @dataclass(frozen=True)
@@ -39,6 +42,8 @@ class LLMClient:
     """Single OpenAI-compatible entry point for all agent model calls."""
 
     def __init__(self, config: LLMConfig):
+        if OpenAI is None:
+            raise RuntimeError("Install project dependencies before creating an LLMClient")
         client_args: dict[str, Any] = {
             "api_key": config.api_key,
             "timeout": config.timeout,
